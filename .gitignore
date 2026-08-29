@@ -1,0 +1,18 @@
+# Python Environments & Cache
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# App Temporary & Media Files
+.gradio/
+backend/ffmpeg_bin/
+temp_*
+*.wav
+*.mp4
+*.avi
+
+# OS & Editor Files
+.DS_Store
+.vscode/
+.idea/
