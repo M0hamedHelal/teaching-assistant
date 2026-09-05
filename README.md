@@ -17,12 +17,12 @@ An AI teaching assistant that lets you **upload a PDF, audio, or video file**, a
 
 ## ✨ Features
 
-- 📄 **PDF Upload** — extracts text automatically (via PyMuPDF)
-- 🎥 **Audio/Video Upload** — transcribes speech to text automatically (via Whisper + ffmpeg)
-- 🔍 **RAG Pipeline** — chunks the document, embeds it (Sentence-Transformers), stores it in a FAISS vector index, and retrieves the most relevant chunks for each question
-- 🧠 **LangGraph Workflow** — classifies whether a question is relevant to the uploaded document before answering, and rejects off-topic questions gracefully
-- 🌐 **Bilingual** — answers in the same language as the question (Arabic or English)
-- 🖥️ **Simple UI** — Gradio interface with separate tabs for direct chat, PDF upload, media upload, and document Q&A
+-  **PDF Upload** — extracts text automatically (via PyMuPDF)
+-  **Audio/Video Upload** — transcribes speech to text automatically (via Whisper + ffmpeg)
+-  **RAG Pipeline** — chunks the document, embeds it (Sentence-Transformers), stores it in a FAISS vector index, and retrieves the most relevant chunks for each question
+-  **LangGraph Workflow** — classifies whether a question is relevant to the uploaded document before answering, and rejects off-topic questions gracefully
+-  **Bilingual** — answers in the same language as the question (Arabic or English)
+-  **Simple UI** — Gradio interface with separate tabs for direct chat, PDF upload, media upload, and document Q&A
 
 ## 🏗️ Architecture
 
@@ -44,7 +44,7 @@ An AI teaching assistant that lets you **upload a PDF, audio, or video file**, a
                                                      Ollama (llama3.2, local LLM)
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 teaching-assistant/
@@ -61,7 +61,7 @@ teaching-assistant/
 
 ---
 
-## ⚙️ Setup Guide (from scratch)
+##  Setup Guide (from scratch)
 
 ### 1. Prerequisites
 
@@ -149,7 +149,7 @@ Gradio will print a local URL (usually `http://127.0.0.1:7860`) — open it in y
 
 ---
 
-## 🧪 Running Tests
+##  Running Tests
 
 ```bash
 pytest tests/
@@ -157,29 +157,14 @@ pytest tests/
 
 > Note: some scripts in `tests/` are demonstration scripts rather than strict `assert`-based tests — check each file before relying on `pytest`'s pass/fail output.
 
-## 🚦 API Endpoints
 
-| Method | Endpoint         | Description                                  |
-|--------|------------------|-----------------------------------------------|
-| GET    | `/`              | Health check                                  |
-| POST   | `/ask`           | Ask the LLM directly (no document context)    |
-| POST   | `/upload`        | Upload a PDF and build its vector index       |
-| POST   | `/upload_media`  | Upload audio/video, transcribe, and index it  |
-| POST   | `/ask_rag`       | Ask a question about the last uploaded file   |
-
-## ⚠️ Known Limitations
+##  Known Limitations
 
 - Single global session — only one document can be active at a time; uploading a new file replaces the previous one. Not yet suitable for multiple concurrent users.
 - Requires a locally running Ollama instance; there's no cloud-LLM fallback yet.
 - Whisper transcription defaults to Arabic (`language="ar"`); change this in `backend/main.py` for other languages.
 
-## 🗺️ Roadmap
 
-- [ ] Per-user/session document isolation
-- [ ] Support for multiple simultaneous documents
-- [ ] Streaming responses
-- [ ] Dockerfile for one-command setup
-
-## 📄 License
+##  License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
