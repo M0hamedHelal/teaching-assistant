@@ -1,10 +1,10 @@
 from backend.rag import chunk_text, create_embeddings
 
-sample_text = "هذا نص تجريبي طويل. " * 100
 
-chunks = chunk_text(sample_text, chunk_size=20, overlap=5)
-embeddings = create_embeddings(chunks)
+def test_embeddings_shape_matches_chunks():
+    sample_text = "هذا نص تجريبي طويل. " * 100
+    chunks = chunk_text(sample_text, chunk_size=20, overlap=5)
+    embeddings = create_embeddings(chunks)
 
-print(f"عدد القطع: {len(chunks)}")
-print(f"شكل المتجهات (embeddings): {embeddings.shape}")
-print(f"أول قيم من متجه القطعة الأولى: {embeddings[0][:5]}")
+    assert embeddings.shape[0] == len(chunks)
+    assert embeddings.shape[1] > 0  

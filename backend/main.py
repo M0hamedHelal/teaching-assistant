@@ -1,17 +1,10 @@
 import imageio_ffmpeg
 import os
-import shutil
 
-ffmpeg_src = imageio_ffmpeg.get_ffmpeg_exe()
-ffmpeg_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ffmpeg_bin")
-os.makedirs(ffmpeg_dir, exist_ok=True)
-ffmpeg_dst = os.path.join(ffmpeg_dir, "ffmpeg.exe")
-
-if not os.path.exists(ffmpeg_dst):
-    shutil.copy(ffmpeg_src, ffmpeg_dst)
-
+# imageio_ffmpeg بيجيب مسار ffmpeg جاهز وشغال على أي نظام تشغيل (ويندوز/لينكس/ماك)
+# فمش محتاجين ننسخه في مكان تاني، بس نضيف الفولدر بتاعه للـ PATH
+ffmpeg_dir = os.path.dirname(imageio_ffmpeg.get_ffmpeg_exe())
 os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ["PATH"]
-
 from fastapi import FastAPI, UploadFile, File
 import requests
 import fitz
@@ -90,19 +83,6 @@ def ask_rag(question: str):
     
     return {"answer": result["answer"]}
 
-# def ask_rag(question: str):
-#     if current_index is None:
-#         return {"error": "You Should Up Load File Befor Ask ."}
-#     # تحديد top_k تلقائياً بناءً على عدد القطع المتاحة
-#     total_chunks = len(current_chunks)
-#     if total_chunks <= 5:
-#         dynamic_top_k = total_chunks  
-#     elif total_chunks <= 15:
-#         dynamic_top_k = 5             
-#     else:
-#         dynamic_top_k = 10          
-#     answer = ask_with_rag(question, current_index, current_chunks, ask_llm, top_k= dynamic_top_k)
-#     return {"answer": answer}
 
 
 def extract_text_from_pdf(file_path: str) -> str:
